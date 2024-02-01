@@ -1,0 +1,35 @@
+{
+  "name": "printhook",
+  "version": "0.0.1",
+  "description": "Stencil Component Starter",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.js",
+  "es2015": "dist/esm/index.js",
+  "es2017": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
+  "collection": "dist/collection/collection-manifest.json",
+  "collection:main": "dist/collection/index.js",
+  "unpkg": "dist/printhook/printhook.esm.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ionic-team/stencil-component-starter.git"
+  },
+  "files": [
+    "dist/",
+    "loader/"
+  ],
+  "scripts": {
+    "build": "stencil build",
+    "start": "stencil build --dev --watch --serve",
+    "generate": "stencil generate"
+  },
+  "dependencies": {
+    "@stencil-community/eslint-plugin": "^0.7.1",
+    "@stencil/core": "^4.7.0",
+    "@stencil/sass": "^3.0.9"
+  },
+  "devDependencies": {
+    "@types/node": "^16.18.11"
+  },
+  "license": "MIT"
+}

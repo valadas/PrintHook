@@ -1,0 +1,26 @@
+:host {
+  display: block;
+}
+h1{
+  text-align: center;
+}
+.form{
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 1em;
+  max-width: 728px;
+  border: 2px solid #000;
+  border-radius: 10px;
+  padding: 2em;
+  margin: 0 auto;
+  label{
+    text-align: right;
+    font-weight: bold;
+  }
+  .controls{
+    grid-column: 2;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+  }
+}
