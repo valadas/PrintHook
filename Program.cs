@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Owin.Hosting;
+using PrintHook.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceProcess;
@@ -14,19 +16,27 @@ namespace PrintHook
         /// </summary>
         static void Main()
         {
-#if DEBUG
-            // While debugging this section is used.
-            var service1 = new Service1();
-            service1.OnDebug();
-            System.Threading.Thread.Sleep(System.Threading.Timeout.Infinite);
-#else
-            ServiceBase[] ServicesToRun;
-            ServicesToRun = new ServiceBase[]
+            var settingsService = new SettingsService();
+            var settings = settingsService.GetSettings();
+            var port = settings.Port;
+            string baseAddress = $"http://localhost:{port}/";
+            using (WebApp.Start(baseAddress))
             {
-                new Service1()
-            };
-            ServiceBase.Run(ServicesToRun);
-#endif
+                Console.WriteLine("Server running on {0}", baseAddress);
+                #if DEBUG
+                    // While debugging this section is used.
+                    var service = new Service();
+                    service.OnDebug();
+                    System.Threading.Thread.Sleep(System.Threading.Timeout.Infinite);
+                #else
+                    ServiceBase[] ServicesToRun;
+                    ServicesToRun = new ServiceBase[]
+                    {
+                        new Service(settings)
+                    };
+                    ServiceBase.Run(ServicesToRun);
+                #endif
+            }
         }
     }
 }

@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>OWIN Hosted Web Page</title>
+        <script type="text/javascript">
+            var endpoint = "/api/settings/";
+            fetch(endpoint + "GetSettings")
+            .then(response => response.json())
+            .then(data => {
+                alert("working");
+                console.log(data);
+            });
+        </script>
+    </head>
+    <body>
+        <h1>Hello, OWIN!</h1>
+        <p>This is a basic static page served by OWIN.</p>
+    </body>
+</html>
