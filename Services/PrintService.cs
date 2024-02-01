@@ -12,7 +12,7 @@ namespace PrintHook.Services
             DymoSDK.App.Init();
         }
 
-        public void PrintLabel(Settings settings)
+        public void PrintLabel(Settings settings, Dictionary<string, string> data)
         {
             var printer = DymoPrinter.Instance.GetPrinters().Result.Single(p => p.Name == settings.PrinterName);
             if (printer != null)
@@ -23,7 +23,10 @@ namespace PrintHook.Services
                 var objects = dymoLabel.GetLabelObjects().ToList();
                 foreach (var obj in objects)
                 {
-                    dymoLabel.UpdateLabelObject(obj, printer.Name);
+                    if (data.TryGetValue(obj.Name, out var value))
+                    {
+                        dymoLabel.UpdateLabelObject(obj, value);
+                    }
                 }
 
                 DymoPrinter.Instance.PrintLabel(dymoLabel, printer.Name);
